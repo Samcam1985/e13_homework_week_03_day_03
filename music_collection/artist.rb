@@ -36,5 +36,13 @@ class Artist
     return albums
   end
 
+  def update()
+    sql = "UPDATE artist SET (
+    name
+    ) = (
+      '#{@name}'
+    ) WHERE is = #{@id}"
+    SqlRunner.run(sql)
+  end
 
 end

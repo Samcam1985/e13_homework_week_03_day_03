@@ -11,10 +11,11 @@ class Album
     @title = options["title"]
     @id = options["id"].to_i() if options["id"]
     @artist_id = options["artist_id"].to_i
+    @genre = options["genre"]
   end
 
   def save()
-    sql = "INSERT INTO albums ( title, artist_id ) VALUES ( '#{@title}', #{@artist_id} ) RETURNING id;"
+    sql = "INSERT INTO albums ( title, artist_id, genre ) VALUES ( '#{@title}', #{@artist_id}, '#{@genre}' ) RETURNING id;"
     @id = SqlRunner.run(sql)[0]["id"].to_i()
   end
 
@@ -37,4 +38,18 @@ class Album
     artist = Artist.new(artist_data)
     return artist
   end
+
+  def update()
+    sql = "UPDATE albums SET (
+    title,
+    artist_id,
+    genre
+    ) = (
+    '#{@title}',
+     #{@artist_id},
+      '#{@genre}'
+    ) WHERE is = #{@id}"
+    SqlRunner.run(sql)
+  end
+
 end
