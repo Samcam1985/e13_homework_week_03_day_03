@@ -53,4 +53,9 @@ class Album
     return albums.map{|album| Album.new(album)}
   end
 
+def find()
+sql = "SELECT * FROM albums WHERE id =#{@id}"
+results = SqlRunner.run(sql)
+return results.map{|album| Album.new(album)}
+end
 end
