@@ -42,7 +42,8 @@ class Artist
     ) = (
       '#{@name}'
     ) WHERE is = #{@id}"
-    SqlRunner.run(sql)
+    artist = SqlRunner.run(sql)
+    return artist.map{|art| Artist.new(art)}
   end
 
 end

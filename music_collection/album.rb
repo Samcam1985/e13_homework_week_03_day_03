@@ -49,7 +49,8 @@ class Album
      #{@artist_id},
       '#{@genre}'
     ) WHERE is = #{@id}"
-    SqlRunner.run(sql)
+    albums = SqlRunner.run(sql)
+    return albums.map{|album| Album.new(album)}
   end
 
 end
