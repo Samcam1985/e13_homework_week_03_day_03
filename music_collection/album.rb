@@ -4,7 +4,7 @@ require_relative "sql_runner"
 
 class Album
 
-  attr_accessor :title
+  attr_accessor :title, :genre
   attr_reader :id
 
   def initialize(options)
@@ -53,9 +53,9 @@ class Album
     return albums.map{|album| Album.new(album)}
   end
 
-def find()
-sql = "SELECT * FROM albums WHERE id =#{@id}"
-results = SqlRunner.run(sql)
-return results.map{|album| Album.new(album)}
+def Album.find(id)
+sql = "SELECT * FROM albums WHERE id = #{id}"
+results = SqlRunner.run(sql)[0]
+return results
 end
 end
